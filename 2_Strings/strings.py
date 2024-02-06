@@ -19,7 +19,7 @@
 
 #   character4 = 1 <----- This is NOT a character. This is an int
 
-# Note: All characters are strings but not all strings are characters.
+# Note: All characters are strings but not all strings are characters in python.
 
 
 #----------------------# Explanation #---------------------#
@@ -113,14 +113,18 @@ def getSectionExample():
 #------------------------# Example #-----------------------#
 def containsExample():
     if "lo" in "hello":
-        print("True")
+        print(True)
         return
-    print("False")
+    print(False)
 
 # Output in Terminal:
 # True
 
 #-------------------------# Work #-------------------------#
+
+# Run autograder by typing 
+# python3 stringsGrader.py 
+# into terminal.
 
 # Problem 1:
 # Combine the first, middle and last name into one string and return it.
@@ -150,87 +154,3 @@ def getStringExcludingSubstring(string, a, b):
 # EXAMPLE: Hamburger or Turkeyburger would return True. Hot dog would return False.
 def isBurger(foodName):
     pass
-
-########################### Grader ##########################
-
-print()
-
-correct = [True, True, True, True, True]
-
-# Problem 1:
-if getFullName("Dalton", "John", "Prokosch") == None:
-    correct[0] = False
-elif getFullName("Dalton", "John", "Prokosch") != "Dalton John Prokosch":
-    correct[0] = False
-    print("Problem 1 is incorrect!")
-    print("Expected: getFullName(\"Dalton\", \"John\", \"Prokosch\") -> \"Dalton John Prokosch\"")
-    print("Received: getFullName(\"Dalton\", \"John\", \"Prokosch\") -> \"" + str(getFullName("Dalton", "John", "Prokosch")) + "\"")
-    print()
-
-# Problem 2:
-prob2 = [["Cow Milk", "Ck"], ["a", "aa"], ["", ""]]
-for p in prob2:
-    a = getFirstAndLastLetterCombined(p[0])
-    if a == None:
-        correct[1] = False
-        break
-    if a != p[1]:
-        correct[1] = False
-        print("Problem 2 is incorrect!")
-        print("Expected: getFirstAndLastLetterCombined(\"" + p[0] + "\") -> \"" + p[1] + "\"")
-        print("Received: getFirstAndLastLetterCombined(\"" + p[0] + "\") -> \"" + a + "\"")
-        print()
-        break
-
-# Problem 3:
-prob3 = [["Panda", 0, 3], ["Bear", 1, 4]]
-for p in prob3:
-    a = getSubstring(p[0], p[1], p[2])
-    if a == None:
-        correct[2] = False
-        break
-    if a != p[0][p[1]:p[2]]:
-        correct[2] = False
-        print("Problem 3 is incorrect!")
-        print("Expected: getSubstring(\"" + str(p[0]) + "\", " + str(p[1]) + ", " + str(p[2]) + ") -> \"" + p[0][p[1]:p[2]] + "\"")
-        print("Received: getSubstring(\"" + str(p[0]) + "\", " + str(p[1]) + ", " + str(p[2]) + ") -> \"" + str(a) + "\"")
-        print()
-        break
-
-# Problem 4:
-prob4 = [["Big Soup Man", 4, 9, "Big Man"], ["Bear Man", 0, 5, "Man"], ["Soda Bucket", 4, 11, "Soda"]]
-for p in prob4:
-    a = getStringExcludingSubstring(p[0], p[1], p[2])
-    if a == None:
-        correct[3] = False
-        break
-    if a != p[3]:
-        correct[3] = False
-        print("Problem 4 is incorrect!")
-        print("Expected: getStringExcludingSubstring(\"" + str(p[0]) + "\", " + str(p[1]) + ", " + str(p[2]) + ") -> \"" + p[3] + "\"")
-        print("Received: getStringExcludingSubstring(\"" + str(p[0]) + "\", " + str(p[1]) + ", " + str(p[2]) + ") -> \"" + str(a) + "\"")
-        print()
-        break
-
-# Problem 5:
-prob5 = [["Turkeyburger", True], ["Hamburger", True], ["Cheeseburger", True], ["Hot Dog", False], ["Slop Bucket", False], ["Burrito", False]]
-for p in prob5:
-    if isBurger(p[0]) == None:
-        correct[4] = False
-        break
-    if isBurger(p[0]) != p[1]:
-        correct[4] = False
-        print("Problem 5 is incorrect!")
-        print("Expected: isBurger(\"" + str(p[0]) + "\") -> " + str(p[1]))
-        print("Received: isBurger(\"" + str(p[0]) + "\") -> " + str(isBurger(p[0])))
-        print()
-        break
-
-amountCorrect = 0
-for c in correct:
-    if c:
-        amountCorrect += 1
-
-grade = int((amountCorrect/5)*100)
-
-print("Grade: " + str(grade))
