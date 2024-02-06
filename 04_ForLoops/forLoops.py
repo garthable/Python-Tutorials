@@ -220,6 +220,7 @@ def findMin(array):
 
 # Problem 4
 # Return true if arrayA and arrayB are equal, return false otherwise.
+# RESTRICTION: Cannot do return arrayA == arrayB, you must use for loops!
 def areEqual(arrayA, arrayB):
     pass
 

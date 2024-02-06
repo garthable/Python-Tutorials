@@ -4,22 +4,23 @@ from forLoops import *
 def test(problemNumber: int, func: any, inputs: list, expectedOuput: any) -> bool:
     if not callable(func):
         raise Exception(str(func) + " is not a function!")
+    
     functionName: str = func.__name__
 
-    functionInputString: str = functionName + "("
+    beginningOfErrorMsg: str = functionName + "("
     for i in range(0, len(inputs)):
         if isinstance(inputs[i], str):
-            functionInputString += "\"" + str(inputs[i]) + "\""
+            beginningOfErrorMsg += "\"" + str(inputs[i]) + "\""
         elif callable(inputs[i]):
-            functionInputString += inputs[i].__name__ + "()"
+            beginningOfErrorMsg += inputs[i].__name__ + "()"
             if inputs[i]() == None:
                 return False
         else:
-            functionInputString += str(inputs[i])
+            beginningOfErrorMsg += str(inputs[i])
         if i == len(inputs) - 1:
             break
-        functionInputString += ", "
-    functionInputString += str(") -> ")
+        beginningOfErrorMsg += ", "
+    beginningOfErrorMsg += str(") -> ")
 
     try:
         receivedOutput: any = func(*inputs)
@@ -27,34 +28,37 @@ def test(problemNumber: int, func: any, inputs: list, expectedOuput: any) -> boo
             return True
         elif receivedOutput == None: # Helps reduce clutter in console
             return False
+        
         print("Problem " + str(problemNumber) + ":")
         
         if isinstance(expectedOuput, str):
-            print("Expected: " + functionInputString + "\"" + str(expectedOuput) + "\"")
+            print("Expected: " + beginningOfErrorMsg + "\"" + expectedOuput + "\"")
         else:
-            print("Expected: " + functionInputString + str(expectedOuput))
+            print("Expected: " + beginningOfErrorMsg + str(expectedOuput))
 
         if isinstance(receivedOutput, str):
-            print("Received: " + functionInputString + "\"" + str(receivedOutput) + "\"")
+            print("Received: " + beginningOfErrorMsg + "\"" + receivedOutput + "\"")
         else:
-            print("Received: " + functionInputString + str(receivedOutput))
-        return False
+            print("Received: " + beginningOfErrorMsg + str(receivedOutput))
     except Exception as error:
         print("Problem " + str(problemNumber) + ":")
         if isinstance(expectedOuput, str):
-            print("Received: " + functionInputString + "\"" + str(expectedOuput) + "\"")
+            print("Received: " + beginningOfErrorMsg + "\"" + expectedOuput + "\"")
         else:
-            print("Expected: " + functionInputString + str(expectedOuput))
-        print("Received: " + functionInputString + "ERROR" + "\n" + str(error))
-        return False
+            print("Expected: " + beginningOfErrorMsg + str(expectedOuput))
+        print("Received: " + beginningOfErrorMsg + "ERROR" + "\n" + str(error))
+    return False
 
 def bulkTest(problemNumber: int, func: any, inputTestCases: list, expectedOutputTestCases: list) -> bool:
     if len(inputTestCases) != len(expectedOutputTestCases):
         raise Exception("InputTestCases must be equal to OutputTestCases!")
-    for i in range(0, len(inputTestCases)):
+    testCaseCount = len(inputTestCases)
+    for i in range(0, testCaseCount):
         if not test(problemNumber, func, inputTestCases[i], expectedOutputTestCases[i]):
             return False
     return True
+
+################### End of Grader Functions ###################
     
 problems = [True, True, True, True, True, True]
 
